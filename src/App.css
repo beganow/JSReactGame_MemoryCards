@@ -1,38 +1,90 @@
-.App {
-  text-align: center;
+body{
+    background-color: #d0e0e6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    text-align: center;
+}
+.container{
+display: flex;
+flex-direction: column;
+justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cards{
+    display: grid;
+    grid-template:repeat(3, 1fr)/repeat(4, 1fr);
+    gap: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card{
+    height: 150px;
+    width: 150px;
+    border-radius: 2px;
+    cursor: pointer;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.card.flipped .inner {
+    transform: rotateY(180deg);
 }
 
-.App-link {
-  color: #61dafb;
+.inner{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;/*Показывает, что дочерний элемент должен быть спозиционирован в 3D-пространстве.*/
+    transition: 0.6s cubic-bezier(8.38, 0.02, 0.09, 1.66) all;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card .front, 
+.card .back{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden; /*как будто не видим карточки*/
+}
+
+.card .front{
+    border: 2px solid rgb(214, 214, 26);
+    background: #fff;
+    transform: rotateY(180deg);
+
+}
+
+.card .back{
+    background: #e3b039;
+    font-size: 100px;
+    transition: 0.3s ease all;
+}
+
+.card .back:hover,
+.button-restart{
+    background: #dba8b1;
+    transform: scale(1.02);
+
+}
+
+.button-restart{
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #eabd55;
+    transition: 0.3s ease all;/*Универсальное свойство, которое позволяет одновременно задать значения transition-property, transition-duration, transition-timing-function и transition-delay. Устанавливает эффект перехода между двумя состояниями элемента*/
+}
+
+.number-of-strokes{
+    font-size: 20px;
+    font-weight: bold;
 }
